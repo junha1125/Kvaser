@@ -1,0 +1,17 @@
+float64 tosec
+uint32 time
+uint32 Tail_Lamp
+uint32 Turn_Lamp
+uint32 Wiper_Mode
+uint32 Wiper_Sensivity
+uint32 APM_Mode
+uint32 APM_Operated_State
+uint32 APM_ERROR_STATUS
+float32 Steering_Angle
+float32 Desired_Steering_Angle
+uint32 TM_G_SEL_DISP
+uint32 ASM_Mode
+uint32 ASM_Operated_State
+uint32 ASM_ERROR_STATUS
+uint32 Brake_Pedal_Signal
+float32 APS_Analog_Value
