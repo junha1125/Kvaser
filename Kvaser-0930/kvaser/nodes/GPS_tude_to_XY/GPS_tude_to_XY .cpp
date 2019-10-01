@@ -1,3 +1,10 @@
+/*
+this node subscrive GPS data(latitude / longitude), CAN data(Mobileye / NiroCan), 
+Lidar data(Point cloud data).Calculate using these data 
+so that we get my vehicle&obstacle imformation 
+and XY - coordinate which we can utilze on Uc - win Load.
+*/
+
 #include <ros/ros.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -75,7 +82,7 @@ void distance_order(int dist[5], int min_ind[3]){
 
 	
     int minindex = 0;
-    // 가장 작은 수의 인덱스 찾기
+
     for(int i =0; i <5 ;i++){
         if(dist[minindex] > dist[i]){
             minindex = i;
@@ -86,7 +93,7 @@ void distance_order(int dist[5], int min_ind[3]){
     dist[minindex] = 1000000000;
     min_ind[0] = minindex;
     }
-    // 두번쨰로 큰 인덱스 찾기
+  
     minindex = 0;
     for(int i =0; i <5 ;i++){
         if(dist[minindex] > dist[i]){
@@ -98,7 +105,7 @@ void distance_order(int dist[5], int min_ind[3]){
     dist[minindex] = 1000000000;
     min_ind[1] = minindex;
     }
-    // 세번쨰로 큰 인덱스 찾기
+    
     minindex = 0;
     for(int i =0; i <5 ;i++){
         if(dist[minindex] > dist[i] && i != min_ind[0] && i != min_ind[1]){
@@ -219,7 +226,12 @@ double Cal_y(double Lat3, double Lon3, double Lat4, double Lon4)
 
 
 
-
+/*
+Below is the code relating to the socket.
+Each barrier has one socket function.
+Each socket function sends an XY coordinate of the obstacle.
+Transfer the location of 3 cars in front, 3 cars in back; 6 cars in total.
+*/
 /* Ros -> Window Data Send */////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 int call_socket(double currX, double currZ){
     
@@ -270,9 +282,7 @@ int call_socket(double currX, double currZ){
 		perror("recv a ");
 		return 4;
 	}
-
 	msg_a[recv_len_a] = '\0';
-
 	printf("received data from socket a : %s\n", msg_a);
 */
     /**/
@@ -477,9 +487,7 @@ int call_socket4(double currX, double currZ, double currY){
 		perror("recv a ");
 		return 4;
 	}
-
 	msg_a[recv_len_a] = '\0';
-
 	printf("received data from socket a : %s\n", msg_a);
 */
     /**/
@@ -542,9 +550,7 @@ int call_socket5(double currX, double currZ, double currY){
 		perror("recv a ");
 		return 4;
 	}
-
 	msg_a[recv_len_a] = '\0';
-
 	printf("received data from socket a : %s\n", msg_a);
 */
     /**/
@@ -608,9 +614,7 @@ int call_socket6(double currX, double currZ, double currY){
 		perror("recv a ");
 		return 4;
 	}
-
 	msg_a[recv_len_a] = '\0';
-
 	printf("received data from socket a : %s\n", msg_a);
 */
     /**/
@@ -818,6 +822,7 @@ void chatterCallback(const sensor_msgs::NavSatFix::ConstPtr& msg)
 			//call_socket(uc_y);
 		}
 
+		// If all conditions are met, execute the following code. Then, the data is transferred using a socket.
 		if(gpsXYdata.Is_change == 1){
 			if(fmod(count,DELAYTIME)==0  && count > 49){
                			X2 = sum_x;
@@ -968,4 +973,3 @@ int main (int argc, char *argv[]){
     ros::spinOnce();
 
   }
-}
