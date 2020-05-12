@@ -3,7 +3,7 @@ This is for Real Time transmission from ROS Topic Data to the Other PC
 And this is Based on Ros Package in Autoware, Kavser.  
 you should Build Autowar_msgs, Autowar_can_msgs First  
 
-### 1. You need to download some packages from 
+### 1. Download some packages from 
 https://github.com/junha1125/Kvaser/tree/junha1125-English-Commend/Kvaser-0930   
 
 ### 2. Move Folders
